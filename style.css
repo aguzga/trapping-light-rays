@@ -73,6 +73,17 @@ h4, h5, h6 {
   font: normal 120% arial, sans-serif;
 }
 
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 15px;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
 
 .hashtag{
   color: #f2f2f2;
@@ -134,4 +145,10 @@ button:hover {
    background-color: rgb(13,108,147);
    color: #ccc;
     box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 7px 5px 0 rgba(0,0,0,0.19);
+}
+
+button:disabled{
+   background-color: rgb(108,108,147);
+   color: grey;
+   box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24), 0 7px 5px 0 rgba(0,0,0,0.19);
 }
