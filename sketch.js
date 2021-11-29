@@ -226,18 +226,20 @@ function exampleMode(){
 }
 
 function drawExample(){
+  var w = window.innerWidth;
+  var start = w/2 - 440
   // Vertical lines
-  mir1 = new Mirror(new Point(180, 200), new Point(180, 300));
-  mir2 = new Mirror(new Point(520, 200), new Point(520, 300));
+  mir1 = new Mirror(new Point(start + 180, 200), new Point(start + 180, 300));
+  mir2 = new Mirror(new Point(start + 520, 200), new Point(start + 520, 300));
   // Open square lines
-  mir3 = new Mirror(new Point(300, 200), new Point(400, 200));
-  mir4 = new Mirror(new Point(300, 300), new Point(400, 300));
+  mir3 = new Mirror(new Point(start + 300, 200), new Point(start + 400, 200));
+  mir4 = new Mirror(new Point(start + 300, 300), new Point(start + 400, 300));
   // Horizontal lines left
-  mir5 = new Mirror(new Point(205, 150), new Point(275, 150));
-  mir6 = new Mirror(new Point(205, 350), new Point(275, 350));
+  mir5 = new Mirror(new Point(start + 205, 150), new Point(start + 275, 150));
+  mir6 = new Mirror(new Point(start + 205, 350), new Point(start + 275, 350));
   // Horizontal lines left
-  mir7 = new Mirror(new Point(425, 150), new Point(495, 150));
-  mir8 = new Mirror(new Point(425, 350), new Point(495, 350));
+  mir7 = new Mirror(new Point(start + 425, 150), new Point(start + 495, 150));
+  mir8 = new Mirror(new Point(start + 425, 350), new Point(start + 495, 350));
   mirrors.push(mir1);
   mirrors.push(mir2);
   mirrors.push(mir3);
