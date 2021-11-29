@@ -34,3 +34,12 @@ canvas {
   background-color: #04AA6D;
   color: white;
 }
+
+.topnav ul {
+   list-style: none;
+   text-align: center;
+}
+
+.topnav ul li {
+   display: inline-block;
+}
