@@ -1,24 +1,4 @@
 /* eslint-disable no-undef, no-unused-vars */
-
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-}
-
-class Mirror {
-  constructor(point1, point2) {
-    this.a = createVector(point1.x, point1.y);
-    this.b = createVector(point2.x, point2.y);
-  }
-
-  show() {
-    stroke(255);
-    line(this.a.x, this.a.y, this.b.x, this.b.y);
-  }
-}
-
 class Ray {
   constructor(point1, point2, src_mirror) {
     this.src_mirror = src_mirror
@@ -126,6 +106,27 @@ class Ray {
 
 }
 
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
+class Mirror {
+  constructor(point1, point2) {
+    this.a = createVector(point1.x, point1.y);
+    this.b = createVector(point2.x, point2.y);
+  }
+
+  show() {
+    stroke(255);
+    line(this.a.x, this.a.y, this.b.x, this.b.y);
+  }
+}
+
+
 function drawArrow(base, vec, myColor) {
   push();
   stroke(myColor);
@@ -139,10 +140,6 @@ function drawArrow(base, vec, myColor) {
   triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
   pop();
 }
-
-//for i in range(n_reflect):
-  //for ray in rays[:-n_rays]:
-    //rays.append(ray.reflect())
 
 
 var points = [];
@@ -163,21 +160,22 @@ function setup() {
   buttonCreateRay = createButton("Create Ray Source");
   buttonShootRays = createButton("Shoot X-rays");
   //buttonChooseRays = createButton("Shoot X-rays");
-  buttonClear.position(25, 25);
-  buttonExample.position(25, 50);
-  buttonCreateRay.position(135,25);
-  buttonShootRays.position(270,25);
+  var x_butt = 25
+  buttonClear.position(x_butt, 40);
+  buttonExample.position(x_butt + 80, 40);
+  buttonCreateRay.position(x_butt + 195,40);
+  buttonShootRays.position(x_butt + 338, 40);
   buttonClear.mouseClicked(resetpoints);
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
   buttonExample.mouseClicked(exampleMode);
 
   sliderRays = createSlider(0, 50, 5, 1);
-  sliderRays.position(275, 55);
+  sliderRays.position(x_butt + 450, 40);
   sliderRays.style('width', '80px');
 
   sliderReflects = createSlider(0, 50, 5, 1);
-  sliderReflects.position(400, 55);
+  sliderReflects.position(580, 40);
   sliderReflects.style('width', '80px');
 
 }
@@ -239,21 +237,23 @@ function draw() {
   // Put drawings here
   background(0);
   fill(255);
-  textSize(24);
-  text(sliderRays.value(), 310, 110);
+  textSize(16);
+  text("RAYS :", 480, 40);
+  //textSize(24);
+  text(sliderRays.value(), 540, 40);
 
-  textSize(20);
+  textSize(16);
   fill("white");
-  text("reflections", 400, 40);
-  text(sliderReflects.value(), 430, 110);
-  //ellipse(300,200, 6);
+  text("REFL. :", 585, 40);
+  //textSize(16);
+  text(sliderReflects.value(), 650, 40);
   fill("black");
 
   rayList = [];
   let n_static = staticRayList.length;
 
   if (interactiveFlag && !staticFlag) {
-    if(mouseY > 200)
+    if(mouseY > 50)
       loadRays(sliderRays.value());
   }
 
@@ -326,7 +326,7 @@ function overlap(base1, base2) {
 }
 
 function mousePressed(clear = false) {
-  if(mouseY > 125){
+  if(mouseY > 50){
     points.push(new Point(mouseX, mouseY));
 
     if (points.length === 2 && ! staticFlag) {
