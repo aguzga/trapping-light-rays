@@ -29,6 +29,7 @@ canvas {
   color: black;
 }
 
+
 /* Add a color to the active/current link */
 .topnav ul li a.active {
   background-color: #04AA6D;
@@ -41,4 +42,68 @@ canvas {
 
 .topnav ul li {
    display: inline-block;
+}
+
+body {
+  font: normal .80em 'trebuchet ms', arial, sans-serif;
+  /*background: #F0EFE2 url(background.png) repeat;*/
+  color: #000;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: normal 175% 'century gothic', arial, sans-serif;
+  color: #000;
+  margin: 0 0 15px 0;
+  padding: 15px 0 5px 0;
+}
+
+h2 {
+  font: normal 175% 'century gothic', arial, sans-serif;
+}
+
+h4, h5, h6 {
+  margin: 0;
+  padding: 0 0 5px 0;
+  font: normal 120% arial, sans-serif;
+}
+
+h5, h6 {
+  font: italic 95% arial, sans-serif;
+  padding: 0 0 15px 0;
+}
+
+.left {
+  float: left;
+  width: auto;
+  margin-right: 10px;
+}
+
+.right {
+  float: right;
+  width: auto;
+  margin-left: 10px;
+}
+
+.center {
+  display: block;
+  text-align: center;
+  margin: 20px auto;
+}
+
+.bold_title{
+  font-weight: bold;
+}
+
+#site_content {
+  width: 854px;
+  overflow: hidden;
+  margin: 0 auto 0 auto;
+  padding: 0 24px 20px 20px;
+  background: #FFF;
+}
+
+#content {
+  text-align: left;
+  float: left;
+  padding: 0;
 }
