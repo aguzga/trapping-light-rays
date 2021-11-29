@@ -67,9 +67,13 @@ h4, h5, h6 {
   font: normal 120% arial, sans-serif;
 }
 
-h5, h6 {
-  font: italic 95% arial, sans-serif;
-  padding: 0 0 15px 0;
+
+.hashtag{
+  color: #ffffff;
+  padding: 4px 4px 4px 4px;
+  background-color: #282828;
+  border-radius: 15px;
+  text-decoration:none;
 }
 
 .left {
