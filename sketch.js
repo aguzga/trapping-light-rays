@@ -30,7 +30,7 @@ class Ray {
       //this.b.setMag(1500);
       //this.touch = new Point(this.b.x, this.b.y);
     //}
-    
+
   }
   shoot(wall) {
     const x1 = wall.a.x;
@@ -63,9 +63,9 @@ class Ray {
     //stroke("yellow")
     //console.log(this.touch.x, this.touch.y)
     //line(this.a.x, this.a.y, this.touch.x, this.touch.y);
-    
+
  // }
-  
+
   show() {
     stroke("yellow");
    // push();
@@ -73,9 +73,9 @@ class Ray {
     //line(0, 0, this.b.x, this.b.y);
     //pop();
     line(this.a.x, this.a.y, this.a.x+this.b.x, this.a.y+this.b.y);
-   
+
   }
-  
+
   findNearestPoint() {
     this.nearest_inter = null;
     this.nearest_mirror = mirrors[0];
@@ -93,7 +93,7 @@ class Ray {
           }
         }
       }
-      
+
     }
     if (this.nearest_inter === null){
       this.b.setMag(1500);
@@ -103,27 +103,27 @@ class Ray {
       this.b.y = this.nearest_inter.y - this.a.y;
     }
       //console.log(this.b.x, this.b.y);
-      
-    
+
+
   }
-  
+
   getReflection(){
     //let dummy = createVector(this.nearest_inter.x, this.nearest_inter.y)
-    
+
     let relatif_vector = this.nearest_mirror.b.copy();
     relatif_vector.sub(this.nearest_inter);
-    
+
     //drawArrow(this.nearest_inter, relatif_vector, 'red');
     relatif_vector.rotate(radians(90));
     //drawArrow(this.nearest_inter, relatif_vector, 'purple');
     let dummy = this.b.copy()
     let reflect_vector = dummy.reflect(relatif_vector);
     //drawArrow(this.nearest_inter, reflect_vector, 'blue');
-    
-    
+
+
     return new Ray(this.nearest_inter, reflect_vector, this.nearest_mirror);
   }
-  
+
 }
 
 function drawArrow(base, vec, myColor) {
@@ -156,7 +156,7 @@ var showExample = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(0); 
+  background(0);
   // Put setup code here
   buttonClear = createButton("Clear all");
   buttonExample = createButton("Draw example");
@@ -171,15 +171,15 @@ function setup() {
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
   buttonExample.mouseClicked(exampleMode);
-  
+
   sliderRays = createSlider(0, 50, 5, 1);
   sliderRays.position(275, 55);
   sliderRays.style('width', '80px');
-  
+
   sliderReflects = createSlider(0, 50, 5, 1);
   sliderReflects.position(400, 55);
   sliderReflects.style('width', '80px');
-  
+
 }
 
 function orientation(a, b, c) {
@@ -194,6 +194,8 @@ function resetpoints() {
   mirrors = [];
   staticRayList = [];
   showExample = false;
+  staticFlag = false;
+  interactiveFlag = false;
 }
 
 function staticMode(){
@@ -216,10 +218,10 @@ function drawExample(){
   mir2 = new Mirror(new Point(520, 200), new Point(520, 300));
   // Open square lines
   mir3 = new Mirror(new Point(300, 200), new Point(400, 200));
-  mir4 = new Mirror(new Point(300, 300), new Point(400, 300)); 
+  mir4 = new Mirror(new Point(300, 300), new Point(400, 300));
   // Horizontal lines left
   mir5 = new Mirror(new Point(205, 150), new Point(275, 150));
-  mir6 = new Mirror(new Point(205, 350), new Point(275, 350)); 
+  mir6 = new Mirror(new Point(205, 350), new Point(275, 350));
   // Horizontal lines left
   mir7 = new Mirror(new Point(425, 150), new Point(495, 150));
   mir8 = new Mirror(new Point(425, 350), new Point(495, 350));
@@ -239,41 +241,41 @@ function draw() {
   fill(255);
   textSize(24);
   text(sliderRays.value(), 310, 110);
-  
+
   textSize(20);
   fill("white");
   text("reflections", 400, 40);
   text(sliderReflects.value(), 430, 110);
   //ellipse(300,200, 6);
   fill("black");
-  
+
   rayList = [];
   let n_static = staticRayList.length;
-  
+
   if (interactiveFlag && !staticFlag) {
     if(mouseY > 200)
       loadRays(sliderRays.value());
   }
-  
+
   if(showExample){
     drawExample();
   }
-  
+
   computeReflections(rayList);
   computeReflections(staticRayList);
-  
- 
+
+
   for (ray of rayList)
     ray.show();
 
   for (ray of staticRayList)
     ray.show();
-  
+
   staticRayList = staticRayList.slice(0, n_static);
-  
+
   //for (ray of staticRayList)
     //ray.nearest_inter = ray.findNearestPoint();
-  
+
   for (let i = 0; i < mirrors.length; i++) {
     mirrors[i].show();
   }
@@ -300,7 +302,7 @@ function computeReflections(rays){
         //console.log(tmp_ray.nearest_inter);
         rays.push(tmp_ray);
       }
-        
+
     }
   }
 }
@@ -314,7 +316,7 @@ function loadRays(raysNumber) {
 }
 
 function overlap(base1, base2) {
-  
+
   const abc = orientation(base1.a, base1.b, base2.a);
   const abd = orientation(base1.a, base1.b, base2.b);
   const acd = orientation(base1.a, base2.a, base2.b);
@@ -326,7 +328,7 @@ function overlap(base1, base2) {
 function mousePressed(clear = false) {
   if(mouseY > 125){
     points.push(new Point(mouseX, mouseY));
-    
+
     if (points.length === 2 && ! staticFlag) {
       let overlapping = false;
       const mir_len = mirrors.length;
@@ -341,7 +343,7 @@ function mousePressed(clear = false) {
       }
       if (!overlapping) mirrors.push(new_mirror);
       else {points.pop(); points.pop();}
-      
+
     }else if(points.length === 2){
       points[1].x -= points[0].x;
       points[1].y -= points[0].y;
