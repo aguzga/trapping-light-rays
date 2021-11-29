@@ -161,23 +161,38 @@ function setup() {
   buttonShootRays = createButton("Shoot X-rays");
   //buttonChooseRays = createButton("Shoot X-rays");
   var x_butt = 25
-  buttonClear.position(x_butt, 40);
-  buttonExample.position(x_butt + 80, 40);
-  buttonCreateRay.position(x_butt + 195,40);
-  buttonShootRays.position(x_butt + 338, 40);
+  var y_butt = 50
+  let backcol = color(60, 60, 60);
+  buttonClear.position(x_butt, y_butt);
+  buttonExample.position(x_butt + 80, y_butt);
+  buttonCreateRay.position(x_butt + 195,y_butt);
+  buttonShootRays.position(x_butt + 338, y_butt);
+
   buttonClear.mouseClicked(resetpoints);
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
   buttonExample.mouseClicked(exampleMode);
 
+  buttonClear.style('background-color', backcol);
+  buttonClear.style('color', '#FFFFFF');
+  buttonClear.style('height', '40px');
+  buttonShootRays.style('background-color', backcol);
+  buttonShootRays.style('color', '#FFFFFF');
+  buttonShootRays.style('height', '40px')
+  buttonCreateRay.style('background-color', backcol);
+  buttonCreateRay.style('color', '#FFFFFF');
+  buttonCreateRay.style('height', '40px')
+  buttonExample.style('background-color', backcol);
+  buttonExample.style('color', '#FFFFFF');
+  buttonExample.style('height', '40px')
+
   sliderRays = createSlider(0, 50, 5, 1);
-  sliderRays.position(x_butt + 450, 40);
+  sliderRays.position(x_butt + 450, y_butt);
   sliderRays.style('width', '80px');
 
   sliderReflects = createSlider(0, 50, 5, 1);
-  sliderReflects.position(580, 40);
+  sliderReflects.position(580, y_butt);
   sliderReflects.style('width', '80px');
-
 }
 
 function orientation(a, b, c) {
@@ -237,16 +252,25 @@ function draw() {
   // Put drawings here
   background(0);
   fill(255);
-  textSize(16);
-  text("RAYS :", 480, 40);
-  //textSize(24);
-  text(sliderRays.value(), 540, 40);
 
-  textSize(16);
+  stroke('white')
+  var w = window.innerWidth;
+  noStroke();
+  let c = color(40, 40, 40);
+  fill(c)
+  rect(0, 0, w, 50);
+
   fill("white");
-  text("REFL. :", 585, 40);
+  textSize(14);
+  text("RAYS :", 480, 38);
+  //textSize(24);
+  text(sliderRays.value(), 540, 38);
+
+  textSize(14);
+  fill("white");
+  text("REFL. :", 585, 38);
   //textSize(16);
-  text(sliderReflects.value(), 650, 40);
+  text(sliderReflects.value(), 645, 38);
   fill("black");
 
   rayList = [];
