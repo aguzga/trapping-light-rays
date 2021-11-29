@@ -12,5 +12,37 @@
         </ul>
     </div>
 
+    <div id="site_content">
+        <div id="content" style="height: 100%;">
+            <h2>Implementation</h2>
+            <p>
+            For the moment, we have implemented an applet that lets the user create disjoint mirrors between
+            each two clicks within the visual limit. On top of that, the user can create rays that are sourced in the
+            mouse position, by selecting the desired number of them through the respective slider. The creation
+            of the dynamic rays happens only when the ”Shoot X-rays” button is clicked, which will shoot the
+            selected number of rays equally separated by an angle such that they are shot all around the ray source.
+            Additionally, we have implemented a mode in which the user can create a static ray in case it wants
+            to shoot in a specific direction, as in the first mode the rays are arranged radially with equal angles
+            from the source.<br> <br>
+            The central part of our implementation is without doubt the reflection of rays whenever they hit
+            a mirror. Firstly, we had to find if a ray hits a mirror, and if it does so, what is the point in which it
+            hits the mirror. Checking the intersection point for every mirror, we are able to find the nearest point
+            that the ray should reflect from. As we have used p5.js Vectors to create the Rays, we are able to
+            reflect the rays by using the reflect function of the p5js Vector class. An illustrative example of how
+            the reflections work is given below, where you can observe 5 reflections. For each reflection, we have
+            drawn the nearest intersection point, the direction of the reflected ray (blue arrow) and the normal to
+            the mirror surface (pink arrow), which is particularly important when calling the reflect function.
+            </p>
+            <br>
+
+            <div class="center">
+              <img src="https://raw.githubusercontent.com/aguzga/trapping-light-rays/main/img/trap.png" alt="Trapping Light Rays with Segment Mirrors" width="400" height="400">
+            </div>
+
+            <br>
+
+        </div>
+    </div>
+
 
 </body></html>
