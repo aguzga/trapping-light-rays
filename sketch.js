@@ -161,7 +161,6 @@ function setup() {
   buttonClear = createButton("Clear all");
   buttonExample = createButton("Draw example");
   buttonCreateRay = createButton("Create Ray Source");
-  buttonManyRays = createButton("Shoot many rays");
   buttonShootRays = createButton("Shoot X-rays");
   //buttonChooseRays = createButton("Shoot X-rays");
   buttonClear.position(25, 25);
@@ -344,7 +343,6 @@ function mousePressed(clear = false) {
       else {points.pop(); points.pop();}
       
     }else if(points.length === 2){
-      console.log('yolo');
       points[1].x -= points[0].x;
       points[1].y -= points[0].y;
       staticRayList.push(new Ray(...points, null));
@@ -353,8 +351,6 @@ function mousePressed(clear = false) {
   }
 
   if (clear === true) resetpoints();
-
-  
 }
 
 // This Redraws the Canvas when resized
