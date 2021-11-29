@@ -12,4 +12,105 @@
         </ul>
     </div>
 
+    <div id="site_content">
+        <div id="content" style="height: 100%;">
+            <h2>Research</h2>
+            <p>
+              In their paper Narrowing Light Rays with Mirros, Joseph O’Rourke and Octavia Petrovici answer the
+              question of whether it is possible to capture a ray of light with a set of curved mirrors ? The answer
+              they give is yes, for both segment and curved mirrors. To do this, they simplified the problem by using
+              a model where the rays coming from a source can be narrowed. To demonstrate this, in the case of
+              segment mirrors, the authors make the following construction :
+            </p>
+            <br>
+            <div class="center">
+              <img src="https://raw.githubusercontent.com/aguzga/trapping-light-rays/main/img/segment_mirrors.png" alt="Segment Mirrors" width="400" height="400">
+            </div>
+            <p>
+              In the case of curved mirrors, the authors use a necklace of disk construction to prove their hypothesis (see figure below).
+            </p>
+            <div class="center">
+              <img src="https://raw.githubusercontent.com/aguzga/trapping-light-rays/main/img/circular_mirrors.PNG" alt="Circular Mirrors" height="400">
+            </div>
+            <p>
+              Thus, O’Rourke and Petrovici state the following two theorems :
+            </p>
+            <ul>
+              <li>Given any &epsilon; > 0, the light emitted by a point source can be narrowed to rays whose angles differs
+              by less than &epsilon; by placements of a finite number of disjoint segment mirrors.</li>
+              <li>Given any &epsilon; > 0, the light emitted by a point source can be narrowed to rays whose angles differs
+              by less than &epsilon; by placements of a finite number of disjoint mirrors disks.</li>
+            </ul>
+            <p>
+              In addition, the authors point out the existence of different models of vertex-rays interactions. Among
+              these models, the first is the round-vertex model, in which a ray striking a vertex (represented by a
+              circular arc) bounces straight back, reversing its approach path. The second model mentioned by the
+              authors is the butt-vertex. In this model, each vertex is cut off with a segment perpendicular to the
+              angle bisector. When a ray hits a convex vertex in this model, it is reflected across the angle bisector.
+              Finally, the last model cited is the split-ray model, in which a ray approaching a reflex apex of the
+              middle inner cone splits into two rays, each one bouncing off the incident edges as if it were hitting those on the interior.
+              <br>
+              <br>
+              In their paper Trapping light rays aperiodically with mirrors, Mitchell, Simon and Zhao showed a
+              mirror configuration in which a single ray of light is trapped aperiodically thus providing a negative
+              solution to the O’Rourke and Petrovici conjecture. This conjecture was the following: the fact that
+              mirrors cannot trap a light ray aperiodically would have implied that no mirror system could trap all
+              the light coming from a point source. The construction put forward by the authors is the following :
+              they placed six mirrors outside the open square, four horizontal and two vertical (see figure below),
+              in such a way that a ray that leaves the central open square in one of these four directions necessarily
+              returns to the same point in the square where it left.
+            </p>
+            <div class="center">
+              <img src="https://raw.githubusercontent.com/aguzga/trapping-light-rays/main/img/mirror_config.png" alt="Mirror Configuration" height="200">
+            </div>
+            <p>
+            Thus the three authors put forward two new theorems :
+            </p>
+            <ul>
+              <li>There is a mirror configuration in the plane that traps a light ray aperiodically.</li>
+              <li>For any n ≥ 1, there is a mirror configuration in the plane that traps n distinct aperiodic rays
+              from a single source.</li>
+            </ul>
+
+            <p>
+            In his paper Trapping light with mirrors, David Milovich Jr. has shown that, given finitely many line-
+            segment mirrors in the plane, that do not touch, and an arbitrary point source of light, if all angles
+            made by lines parallel to mirrors are rational multiples of π, then all but countably many emitted
+            light beams escape. This result implies that, for a given point source of light, a randomly chosen
+            configuration of finitely many nontouching line-segment mirrors has a nonzero probability of letting
+            at least one light beam escape. It seems important to note that, for simplification reasons, the author
+            has chosen a mirror model for which the endpoints of the mirrors absorb all light beams. To reach
+            the above conclusion, the author proves a series of theorems used as basic brick to provide a partial
+            solution to the open problem posed by O’Rourke and Petrovici :
+            </p>
+
+            <ul>
+              <li>Given two light beams with initial states 〈x1,v1〉and 〈x2,v2〉, if the light beams have equal, trapped hit sequences, then v1 = v2.</li>
+              <li>For any two complex numbers x and x’, there are only countably many directions that allow a
+              path from x to x’.</li>
+              <li>Suppose the light beam with initial state 〈x0,v0〉 has a trapped periodic hit sequence; i.e., there is
+              a positive integer P such that 〈μk(x0,v0)〉∞k=1 = 〈μk+ P(x0,v0)〉∞k=1. Then the light beam’s state
+              is also periodic.</li>
+              <li>Given an initial light-beam state, the set of legal configurations of n mirrors that allow the light
+              beam to escape is an open subset of the set of all legal configurations; i.e., it is open in Mn.
+              Moreover, given a finite sequence of mirror indices σ, let W denote let the set of legal configu-
+              rations of n mirrors for which σ is initial segment of the light beam’s hit sequence. Then W is
+              also open.</li>
+              <li>Let N be a nonnegative integer and let 〈h0,p0〉 be an initial light beam state. Suppose that q0
+              is not on any mirror or mirror endpoint, and that the light beam with initial state hq0, p0 hits
+              mirrors at least N times before escaping of being absorbed. Then there is a neighborhood U of
+              〈q0,p0〉 in C ×S1 such that, for every 〈q′0,p′0〉 in U, the light beams with initial states 〈q0,p0〉
+              and 〈q′0,p′0〉 agree on the first N elements of their hit sequences. Also, let W denote the set of all
+              light-beam states 〈q′0,p′0〉 such that 〈q′0,p′0〉 is not on the closure of a mirror, and the light beam
+              with initial state 〈q′0,p′0〉 escapes after hitting mirrors exactly N times. Then W is open.</li>
+
+            </ul>
+
+
+            <br>
+
+        </div>
+    </div>
+
+
 </body></html>
