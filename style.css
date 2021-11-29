@@ -14,8 +14,8 @@ canvas {
 }
 
 /* Style the links inside the navigation bar */
-.topnav a {
-  float: left;
+.topnav ul li a {
+  float: center;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 16px;
@@ -24,22 +24,13 @@ canvas {
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
+.topnav ul li a:hover {
   background-color: #ddd;
   color: black;
 }
 
 /* Add a color to the active/current link */
-.topnav a.active {
+.topnav ul li a.active {
   background-color: #04AA6D;
   color: white;
-}
-
-.topnav ul {
-   list-style: none;
-   text-align: center;
-}
-
-.topnav ul li {
-   display: inline-block;
 }
