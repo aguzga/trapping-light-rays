@@ -297,6 +297,9 @@ function draw() {
 
   staticRayList = staticRayList.slice(0, n_static);
 
+  for (ray of staticRayList)
+    ray.findNearestPoint();
+
   //for (ray of staticRayList)
     //ray.nearest_inter = ray.findNearestPoint();
 
