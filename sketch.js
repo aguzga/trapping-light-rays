@@ -6,28 +6,21 @@ class Ray {
     if(typeof(point2) === "number") this.b = p5.Vector.fromAngle(radians(point2));
     else this.b = createVector(point2.x, point2.y);
     this.findNearestPoint();
-    //if (this.touch === null) {
-      //this.b.setMag(1500);
-      //this.touch = new Point(this.b.x, this.b.y);
-    //}
-
   }
+
   shoot(wall) {
     const x1 = wall.a.x;
     const y1 = wall.a.y;
     const x2 = wall.b.x;
     const y2 = wall.b.y;
-
     const x3 = this.a.x;
     const y3 = this.a.y;
     const x4 = this.a.x + this.b.x;
     const y4 = this.a.y + this.b.y;
-
     const den = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
     if (den === 0) {
       return;
     }
-
     const t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / den;
     const u = -((x1 - x2) * (y1 - y3) - (y1 - y2) * (x1 - x3)) / den;
     if (t > 0 && t < 1 && u > 0) {
@@ -39,21 +32,10 @@ class Ray {
       return;
     }
   }
-  //show() {
-    //stroke("yellow")
-    //console.log(this.touch.x, this.touch.y)
-    //line(this.a.x, this.a.y, this.touch.x, this.touch.y);
-
- // }
 
   show() {
     stroke("yellow");
-   // push();
-    //translate(this.a.x, this.a.y);
-    //line(0, 0, this.b.x, this.b.y);
-    //pop();
     line(this.a.x, this.a.y, this.a.x+this.b.x, this.a.y+this.b.y);
-
   }
 
   findNearestPoint() {
@@ -73,7 +55,6 @@ class Ray {
           }
         }
       }
-
     }
     if (this.nearest_inter === null){
       this.b.setMag(1500);
@@ -82,28 +63,20 @@ class Ray {
       this.b.x = this.nearest_inter.x - this.a.x;
       this.b.y = this.nearest_inter.y - this.a.y;
     }
-      //console.log(this.b.x, this.b.y);
-
-
   }
 
   getReflection(){
     //let dummy = createVector(this.nearest_inter.x, this.nearest_inter.y)
-
     let relatif_vector = this.nearest_mirror.b.copy();
     relatif_vector.sub(this.nearest_inter);
-
     //drawArrow(this.nearest_inter, relatif_vector, 'red');
     relatif_vector.rotate(radians(90));
     //drawArrow(this.nearest_inter, relatif_vector, 'purple');
     let dummy = this.b.copy()
     let reflect_vector = dummy.reflect(relatif_vector);
     //drawArrow(this.nearest_inter, reflect_vector, 'blue');
-
-
     return new Ray(this.nearest_inter, reflect_vector, this.nearest_mirror);
   }
-
 }
 
 
@@ -149,13 +122,15 @@ var staticRayList = [];
 
 var staticFlag = false;
 var interactiveFlag = false;
-var showExample = false;
+var showExample1 = false;
+var showExample2 = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // Put setup code here
   buttonClear = createButton("Clear all");
-  buttonExample = createButton("Draw example");
+  buttonExample = createButton("Example 1");
+  buttonExample2 = createButton("Example 2");
   buttonCreateRay = createButton("Create Ray Source");
   buttonShootRays = createButton("Shoot X-rays");
   //buttonChooseRays = createButton("Shoot X-rays");
@@ -164,13 +139,15 @@ function setup() {
   let backcol = color(60, 60, 60);
   buttonClear.position(x_butt, y_butt);
   buttonExample.position(x_butt + 80, y_butt);
-  buttonCreateRay.position(x_butt + 195,y_butt);
-  buttonShootRays.position(x_butt + 338, y_butt);
+  buttonExample2.position(x_butt + 175, y_butt);
+  buttonCreateRay.position(x_butt + 270,y_butt);
+  buttonShootRays.position(x_butt + 418, y_butt);
 
   buttonClear.mouseClicked(resetpoints);
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
-  buttonExample.mouseClicked(exampleMode);
+  buttonExample.mouseClicked(exampleMode1);
+  buttonExample2.mouseClicked(exampleMode2);
 
   buttonClear.style('background-color', backcol);
   buttonClear.style('color', '#FFFFFF');
@@ -184,20 +161,22 @@ function setup() {
   buttonExample.style('background-color', backcol);
   buttonExample.style('color', '#FFFFFF');
   buttonExample.style('height', '40px')
+  buttonExample2.style('background-color', backcol);
+  buttonExample2.style('color', '#FFFFFF');
+  buttonExample2.style('height', '40px')
 
   sliderRays = createSlider(0, 50, 5, 1);
-  sliderRays.position(x_butt + 450, y_butt);
+  sliderRays.position(x_butt + 530, y_butt);
   sliderRays.style('width', '80px');
 
   sliderReflects = createSlider(0, 50, 5, 1);
-  sliderReflects.position(580, y_butt);
+  sliderReflects.position(650, y_butt);
   sliderReflects.style('width', '80px');
 }
 
 function orientation(a, b, c) {
   let val = (b.y - a.y) * (c.x - b.x) - (b.x - a.x) * (c.y - b.y);
   //signs inverted for y coordinates in order to have (0,0) as lower left corner
-
   return val;
 }
 
@@ -220,11 +199,19 @@ function interactiveMode() {
   staticFlag = false;
 }
 
-function exampleMode(){
-  showExample = true;
+function exampleMode1(){
+  resetpoints();
+  showExample1 = true;
+  showExample2 = false;
 }
 
-function drawExample(){
+function exampleMode2(){
+  resetpoints();
+  showExample2 = true;
+  showExample1 = false;
+}
+
+function drawExample1(){
   var w = window.innerWidth;
   var start = w/2 - 440
   // Vertical lines
@@ -247,6 +234,35 @@ function drawExample(){
   mirrors.push(mir6);
   mirrors.push(mir7);
   mirrors.push(mir8);
+  // Light source
+  staticRayList.push(new Ray(new Point(start + 300, 290), new Point(190, 316), null));
+}
+
+function drawExample2(){
+  // Light source
+  var w = window.innerWidth;
+  var start = w/2 - 400
+  // Frist two parallel lines
+  mir1 = new Mirror(new Point(start + 180, 250), new Point(start + 180 - 100, 350));
+  mir2 = new Mirror(new Point(start + 180, 150), new Point(start + 180 - 100, 250));
+  mirrors.push(mir1);
+  mirrors.push(mir2);
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 0), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -20), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -40), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -60), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -80), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -100), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -120), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -140), null));
+
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 20), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 40), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 60), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 80), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 100), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 120), null));
+  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 140), null));
 }
 
 function draw() {
@@ -264,15 +280,15 @@ function draw() {
 
   fill("white");
   textSize(14);
-  text("RAYS :", 480, 38);
+  text("RAYS :", 560, 38);
   //textSize(24);
-  text(sliderRays.value(), 540, 38);
+  text(sliderRays.value(), 620, 38);
 
   textSize(14);
   fill("white");
-  text("REFL. :", 585, 38);
+  text("REFL. :", 655, 38);
   //textSize(16);
-  text(sliderReflects.value(), 645, 38);
+  text(sliderReflects.value(), 718, 38);
   fill("black");
 
   rayList = [];
@@ -283,8 +299,12 @@ function draw() {
       loadRays(sliderRays.value());
   }
 
-  if(showExample){
-    drawExample();
+  if(showExample1){
+    drawExample1();
+  }
+
+  if(showExample2){
+    drawExample2();
   }
 
   computeReflections(rayList);
