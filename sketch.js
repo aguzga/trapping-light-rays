@@ -153,7 +153,6 @@ var showExample = false;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(0);
   // Put setup code here
   buttonClear = createButton("Clear all");
   buttonExample = createButton("Draw example");
@@ -252,7 +251,8 @@ function drawExample(){
 
 function draw() {
   // Put drawings here
-  background(0);
+  let back = color(20, 20, 20);
+  background(back);
   fill(255);
 
   stroke('white')
