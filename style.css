@@ -13,6 +13,7 @@ canvas {
 .topnav {
   background-color: #282828;
   overflow: hidden;
+  height : 48px;
 }
 
 /* Style the links inside the navigation bar */
@@ -30,6 +31,8 @@ canvas {
 .topnav ul li a:hover {
   background-color: #eee;
   color: black;
+  font-size: 18px;
+  transition: font-size 0.2s;
 }
 
 
@@ -37,6 +40,7 @@ canvas {
 .topnav ul li a.active {
   background-color: #04AA6D;
   color: white;
+  font-size: 18px;
 }
 
 .topnav ul {
@@ -92,7 +96,14 @@ h4, h5, h6 {
   padding: 4px 4px 4px 4px;
   background-color:#04AA6D;
   border-radius: 15px;
+  font-size: 12px;
   text-decoration:none;
+  transition: font-size 0.2s;
+}
+.hashtag:hover {
+  background-color:#04AA6D;
+  font-size: 13px;
+   /*box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 7px 5px 0 rgba(0,0,0,0.19);*/
 }
 
 .left {
