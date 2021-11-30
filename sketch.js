@@ -184,7 +184,8 @@ function resetpoints() {
   points = [];
   mirrors = [];
   staticRayList = [];
-  showExample = false;
+  showExample1 = false;
+  showExample2 = false;
   staticFlag = false;
   interactiveFlag = false;
 }
