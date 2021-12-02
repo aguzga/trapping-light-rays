@@ -45,7 +45,6 @@ class Ray {
       if (mirror != this.src_mirror){
         const point = this.shoot(mirror);
         if (point) {
-          //console.log(mirrors[1] == mirror, mirrors.length)
           const d = p5.Vector.dist(this.a, point);
           if (d < smallestDist) {
             smallestDist = d;
@@ -57,7 +56,6 @@ class Ray {
     }
     if (this.nearest_inter === null){
       this.b.setMag(1500);
-      //console.log(rayList.length);
     }else{
       this.b.x = this.nearest_inter.x - this.a.x;
       this.b.y = this.nearest_inter.y - this.a.y;
@@ -68,12 +66,26 @@ class Ray {
     //let dummy = createVector(this.nearest_inter.x, this.nearest_inter.y)
     let relatif_vector = this.nearest_mirror.b.copy();
     relatif_vector.sub(this.nearest_inter);
-    //drawArrow(this.nearest_inter, relatif_vector, 'red');
+    this.drawArrow(this.nearest_inter, relatif_vector, 'red');
     relatif_vector.rotate(radians(90));
-    //drawArrow(this.nearest_inter, relatif_vector, 'purple');
+    this.drawArrow(this.nearest_inter, relatif_vector, 'purple');
     let dummy = this.b.copy()
     let reflect_vector = dummy.reflect(relatif_vector);
-    //drawArrow(this.nearest_inter, reflect_vector, 'blue');
+    this.drawArrow(this.nearest_inter, reflect_vector, 'blue');
     return new Ray(this.nearest_inter, reflect_vector, this.nearest_mirror);
+  }
+
+  drawArrow(base, vec, myColor) {
+    push();
+    stroke(myColor);
+    strokeWeight(3);
+    fill(myColor);
+    translate(base.x, base.y);
+    line(0, 0, vec.x, vec.y);
+    rotate(vec.heading());
+    let arrowSize = 7;
+    translate(vec.mag() - arrowSize, 0);
+    triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+    pop();
   }
 }
