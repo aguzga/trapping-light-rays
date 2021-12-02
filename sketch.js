@@ -11,6 +11,7 @@ var staticFlag = false;
 var interactiveFlag = false;
 var showExample1 = false;
 var showExample2 = false;
+var showarr = false;
 
 //==============================================================================
 // SETUP FUNCTION
@@ -22,20 +23,24 @@ function setup() {
   buttonExample2 = createButton("Example 2");
   buttonCreateRay = createButton("Create Ray Source");
   buttonShootRays = createButton("Shoot X-rays");
+  buttonShowArrow = createButton("Show arrow");
   var x_butt = 25
   var y_butt = 50
+  var w = window.innerWidth;
   let backcol = color(60, 60, 60);
   buttonClear.position(x_butt, y_butt);
   buttonExample.position(x_butt + 80, y_butt);
   buttonExample2.position(x_butt + 175, y_butt);
   buttonCreateRay.position(x_butt + 270,y_butt);
   buttonShootRays.position(x_butt + 418, y_butt);
+  buttonShowArrow.position(w-135, y_butt);
 
   buttonClear.mouseClicked(resetpoints);
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
   buttonExample.mouseClicked(exampleMode1);
   buttonExample2.mouseClicked(exampleMode2);
+  buttonShowArrow.mouseClicked(showArrow)
 
   buttonClear.style('background-color', backcol);
   buttonClear.style('color', '#FFFFFF');
@@ -52,6 +57,9 @@ function setup() {
   buttonExample2.style('background-color', backcol);
   buttonExample2.style('color', '#FFFFFF');
   buttonExample2.style('height', '40px')
+  buttonShowArrow.style('background-color', backcol);
+  buttonShowArrow.style('color', '#FFFFFF');
+  buttonShowArrow.style('height', '40px')
 
   sliderRays = createSlider(0, 50, 5, 1);
   sliderRays.position(x_butt + 530, y_butt);
@@ -73,6 +81,7 @@ function resetpoints() {
   showExample2 = false;
   staticFlag = false;
   interactiveFlag = false;
+  showarr = false;
 }
 
 function staticMode(){
@@ -95,6 +104,15 @@ function exampleMode2(){
   resetpoints();
   showExample2 = true;
   showExample1 = false;
+}
+
+function showArrow(){
+  if(showarr === false){
+    showarr = true;
+  }
+  else{
+    showarr = false;
+  }
 }
 
 //==============================================================================
@@ -215,7 +233,7 @@ function computeReflections(rays){
     for (ray of tmp){
       if (ray.nearest_inter !== null){
         ellipse(ray.nearest_inter.x, ray.nearest_inter.y, 10);
-        let tmp_ray = ray.getReflection();
+        let tmp_ray = ray.getReflection(showarr);
         if (tmp_ray.nearest_inter !== null)
           ellipse(tmp_ray.nearest_inter.x, tmp_ray.nearest_inter.y, 10);
         rays.push(tmp_ray);

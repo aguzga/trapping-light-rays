@@ -62,16 +62,21 @@ class Ray {
     }
   }
 
-  getReflection(){
-    //let dummy = createVector(this.nearest_inter.x, this.nearest_inter.y)
+  getReflection(flagShowArrow){
     let relatif_vector = this.nearest_mirror.b.copy();
     relatif_vector.sub(this.nearest_inter);
-    this.drawArrow(this.nearest_inter, relatif_vector, 'red');
+    if(flagShowArrow){
+      this.drawArrow(this.nearest_inter, relatif_vector, 'red');
+    }
     relatif_vector.rotate(radians(90));
-    this.drawArrow(this.nearest_inter, relatif_vector, 'purple');
+    if(flagShowArrow){
+      this.drawArrow(this.nearest_inter, relatif_vector, 'purple');
+    }
     let dummy = this.b.copy()
     let reflect_vector = dummy.reflect(relatif_vector);
-    this.drawArrow(this.nearest_inter, reflect_vector, 'blue');
+    if(flagShowArrow){
+      this.drawArrow(this.nearest_inter, reflect_vector, 'blue');
+    }
     return new Ray(this.nearest_inter, reflect_vector, this.nearest_mirror);
   }
 
