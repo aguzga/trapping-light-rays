@@ -1,39 +1,27 @@
 /* eslint-disable no-undef, no-unused-vars */
 
-function drawArrow(base, vec, myColor) {
-  push();
-  stroke(myColor);
-  strokeWeight(3);
-  fill(myColor);
-  translate(base.x, base.y);
-  line(0, 0, vec.x, vec.y);
-  rotate(vec.heading());
-  let arrowSize = 7;
-  translate(vec.mag() - arrowSize, 0);
-  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
-  pop();
-}
-
-
+//==============================================================================
+// GLOBAL VARIABLES
+//==============================================================================
 var points = [];
 var mirrors = [];
 var rayList = [];
 var staticRayList = [];
-
 var staticFlag = false;
 var interactiveFlag = false;
 var showExample1 = false;
 var showExample2 = false;
 
+//==============================================================================
+// SETUP FUNCTION
+//==============================================================================
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  // Put setup code here
   buttonClear = createButton("Clear all");
   buttonExample = createButton("Example 1");
   buttonExample2 = createButton("Example 2");
   buttonCreateRay = createButton("Create Ray Source");
   buttonShootRays = createButton("Shoot X-rays");
-  //buttonChooseRays = createButton("Shoot X-rays");
   var x_butt = 25
   var y_butt = 50
   let backcol = color(60, 60, 60);
@@ -42,13 +30,11 @@ function setup() {
   buttonExample2.position(x_butt + 175, y_butt);
   buttonCreateRay.position(x_butt + 270,y_butt);
   buttonShootRays.position(x_butt + 418, y_butt);
-
   buttonClear.mouseClicked(resetpoints);
   buttonShootRays.mouseClicked(interactiveMode);
   buttonCreateRay.mouseClicked(staticMode);
   buttonExample.mouseClicked(exampleMode1);
   buttonExample2.mouseClicked(exampleMode2);
-
   buttonClear.style('background-color', backcol);
   buttonClear.style('color', '#FFFFFF');
   buttonClear.style('height', '40px');
@@ -64,22 +50,17 @@ function setup() {
   buttonExample2.style('background-color', backcol);
   buttonExample2.style('color', '#FFFFFF');
   buttonExample2.style('height', '40px')
-
   sliderRays = createSlider(0, 50, 5, 1);
   sliderRays.position(x_butt + 530, y_butt);
   sliderRays.style('width', '80px');
-
   sliderReflects = createSlider(0, 50, 5, 1);
   sliderReflects.position(650, y_butt);
   sliderReflects.style('width', '80px');
 }
 
-function orientation(a, b, c) {
-  let val = (b.y - a.y) * (c.x - b.x) - (b.x - a.x) * (c.y - b.y);
-  //signs inverted for y coordinates in order to have (0,0) as lower left corner
-  return val;
-}
-
+//==============================================================================
+// FUNCTIONS WHICH MODIFY GLOBAL VARIABLES
+//==============================================================================
 function resetpoints() {
   points = [];
   mirrors = [];
@@ -110,6 +91,23 @@ function exampleMode2(){
   resetpoints();
   showExample2 = true;
   showExample1 = false;
+}
+
+//==============================================================================
+// DRAWING FUNCTIONS
+//==============================================================================
+function drawArrow(base, vec, myColor) {
+  push();
+  stroke(myColor);
+  strokeWeight(3);
+  fill(myColor);
+  translate(base.x, base.y);
+  line(0, 0, vec.x, vec.y);
+  rotate(vec.heading());
+  let arrowSize = 7;
+  translate(vec.mag() - arrowSize, 0);
+  triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize, 0);
+  pop();
 }
 
 function drawExample1(){
@@ -156,7 +154,6 @@ function drawExample2(){
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -100), null));
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -120), null));
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -140), null));
-
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 20), null));
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 40), null));
   staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 60), null));
@@ -167,79 +164,61 @@ function drawExample2(){
 }
 
 function draw() {
-  // Put drawings here
   let back = color(20, 20, 20);
   background(back);
   fill(255);
-
   stroke('white')
   var w = window.innerWidth;
   noStroke();
   let c = color(40, 40, 40);
   fill(c)
   rect(0, 0, w, 50);
-
   fill("white");
   textSize(14);
   text("RAYS :", 560, 38);
-  //textSize(24);
   text(sliderRays.value(), 620, 38);
-
   textSize(14);
   fill("white");
   text("REFL. :", 655, 38);
-  //textSize(16);
   text(sliderReflects.value(), 718, 38);
   fill("black");
 
   rayList = [];
   let n_static = staticRayList.length;
-
   if (interactiveFlag && !staticFlag) {
     if(mouseY > 50)
       loadRays(sliderRays.value());
   }
-
   if(showExample1){
     drawExample1();
   }
-
   if(showExample2){
     drawExample2();
   }
-
   computeReflections(rayList);
   computeReflections(staticRayList);
-
-
   for (ray of rayList)
     ray.show();
-
   for (ray of staticRayList)
     ray.show();
-
   staticRayList = staticRayList.slice(0, n_static);
-
   for (ray of staticRayList)
     ray.findNearestPoint();
-
-  //for (ray of staticRayList)
-    //ray.nearest_inter = ray.findNearestPoint();
-
   for (let i = 0; i < mirrors.length; i++) {
     mirrors[i].show();
   }
 }
 
+//==============================================================================
+// COMPUTATIONAL GEOMETRY FUNCTIONS
+//==============================================================================
 function orientation(a, b, c) {
   let val = (b.y - a.y) * (c.x - b.x) - (b.x - a.x) * (c.y - b.y);
-
-  return Math.sign(val);
+  return val;
 }
 
 function computeReflections(rays){
   let n_reflect = sliderReflects.value();
-
   const raysNumber = rays.length;
   for (let i=0; i<n_reflect; i++){
     let tmp = rays.slice(rays.length-raysNumber, rays.length)
@@ -249,42 +228,47 @@ function computeReflections(rays){
         let tmp_ray = ray.getReflection();
         if (tmp_ray.nearest_inter !== null)
           ellipse(tmp_ray.nearest_inter.x, tmp_ray.nearest_inter.y, 10);
-        //console.log(tmp_ray.nearest_inter);
         rays.push(tmp_ray);
       }
-
     }
   }
 }
 
+function overlap(base1, base2) {
+  const abc = orientation(base1.a, base1.b, base2.a);
+  const abd = orientation(base1.a, base1.b, base2.b);
+  const acd = orientation(base1.a, base2.a, base2.b);
+  const bcd = orientation(base1.b, base2.a, base2.b);
+  return acd !== bcd && abc !== abd
+}
+
+//==============================================================================
+// UTILITY FUNCTIONS
+//==============================================================================
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function loadRays(raysNumber) {
   let degreeStep = 360/raysNumber;
-  //if degreeStep != null
   for (let i=0; i<raysNumber*degreeStep; i+= degreeStep) {
     rayList.push(new Ray(new Point(mouseX, mouseY), i, null))
   }
 }
 
-function overlap(base1, base2) {
-
-  const abc = orientation(base1.a, base1.b, base2.a);
-  const abd = orientation(base1.a, base1.b, base2.b);
-  const acd = orientation(base1.a, base2.a, base2.b);
-  const bcd = orientation(base1.b, base2.a, base2.b);
-
-  return acd !== bcd && abc !== abd
-}
-
+//==============================================================================
+// USER INTERACTIONS FUNCTIONS
+//==============================================================================
 function mousePressed(clear = false) {
   if(mouseY > 50){
     points.push(new Point(mouseX, mouseY));
-
     if (points.length === 2 && ! staticFlag) {
       let overlapping = false;
       const mir_len = mirrors.length;
       let new_mirror = new Mirror(...points);
       points = [];
-
       for (let i = 0; i < mir_len; i++) {
         if (overlap(mirrors[i], new_mirror)) {
           overlapping = true;
@@ -293,25 +277,17 @@ function mousePressed(clear = false) {
       }
       if (!overlapping) mirrors.push(new_mirror);
       else {points.pop(); points.pop();}
-
-    }else if(points.length === 2){
+    }
+    else if(points.length === 2){
       points[1].x -= points[0].x;
       points[1].y -= points[0].y;
       staticRayList.push(new Ray(...points, null));
       points = [];
     }
   }
-
   if (clear === true) resetpoints();
 }
 
-// This Redraws the Canvas when resized
 windowResized = function () {
   resizeCanvas(windowWidth, windowHeight);
 };
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
