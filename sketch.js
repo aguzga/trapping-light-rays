@@ -104,6 +104,14 @@ function exampleMode2(){
   resetpoints();
   showExample2 = true;
   showExample1 = false;
+    // Light source
+  var w = window.innerWidth;
+  var start = w/2 - 400
+  // Frist two parallel lines
+  mir1 = new Mirror(new Point(start + 180, 250), new Point(start + 180 - 100, 350));
+  mir2 = new Mirror(new Point(start + 180, 150), new Point(start + 180 - 100, 250));
+  mirrors.push(mir1);
+  mirrors.push(mir2);
 }
 
 function showArrow(){
@@ -146,29 +154,12 @@ function drawExample1(){
 }
 
 function drawExample2(){
-  // Light source
   var w = window.innerWidth;
   var start = w/2 - 400
-  // Frist two parallel lines
-  mir1 = new Mirror(new Point(start + 180, 250), new Point(start + 180 - 100, 350));
-  mir2 = new Mirror(new Point(start + 180, 150), new Point(start + 180 - 100, 250));
-  mirrors.push(mir1);
-  mirrors.push(mir2);
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 0), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -20), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -40), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -60), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -80), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -100), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -120), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, -140), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 20), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 40), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 60), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 80), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 100), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 120), null));
-  staticRayList.push(new Ray(new Point(start, 349), new Point(start + 100, 140), null));
+
+  for(let i = -70; i <= 70; i += 10) {
+    staticRayList.push(new Ray(new Point(start, 349), new Point(100, i), null));
+  }
 }
 
 function draw() {
