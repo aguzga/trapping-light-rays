@@ -22,7 +22,7 @@ function setup() {
   buttonExample = createButton("Example 1");
   buttonExample2 = createButton("Example 2");
   buttonCreateRay = createButton("Create Ray Source");
-  buttonShootRays = createButton("Shoot n-dynamic rays");
+  buttonShootRays = createButton("Shoot n-rays");
   buttonShowArrow = createButton("Show arrow");
   var x_butt = 25
   var y_butt = 50
