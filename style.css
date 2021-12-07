@@ -53,7 +53,6 @@ canvas {
 
 body {
   font: normal .80em 'computer modern', arial;
-  /*background: #F0EFE2 url(background.png) repeat;*/
   color: #000;
 }
 
@@ -108,7 +107,6 @@ h4, h5, h6 {
 .hashtag:hover {
   background-color:#04AA6D;
   font-size: 13px;
-   /*box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 7px 5px 0 rgba(0,0,0,0.19);*/
 }
 
 .left {
