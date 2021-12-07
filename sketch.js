@@ -181,6 +181,7 @@ function draw() {
   text("REFL. :", 655, 38);
   text(sliderReflects.value(), 718, 38);
   fill("black");
+  stroke("white")
 
   rayList = [];
   let n_static = staticRayList.length;
