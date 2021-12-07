@@ -73,6 +73,11 @@ h2 {
   font: normal 175% 'computer modern', arial, sans-serif;
 }
 
+li {
+  padding-right: .6em;
+	margin: 1em 0;
+}
+
 h4, h5, h6 {
   margin: 0;
   padding: 0 0 5px 0;
